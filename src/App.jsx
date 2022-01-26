@@ -6,45 +6,66 @@ import Footer from "./components/Footer.js";
 import axios from "axios";
 const App = () => {
   const [allCalls, setAllCalls] = useState([]);
-  const [archivedCalls, setArchivedCalls] = useState([])
-  const [state, setState] = useState([]);
+  const [archivedCalls, setArchivedCalls] = useState([]);
+  const [state, setState] = useState("CURRENT");
   const url = "https://aircall-job.herokuapp.com/activities";
 
   function allCallData() {
-    axios.get(url).then((res) => {
-      console.log(res.data);
-      setAllCalls(res.data)
-      }).catch((e) => {
-        console.log("error,", e);;
-    });
+    axios
+      .get(url)
+      .then((res) => {
+        console.log(res.data);
+        setAllCalls(res.data);
+      })
+      .catch((e) => {
+        console.log("error,", e);
+      });
   }
 
   function archivedCallData() {
-    axios.get(url).then((res) => {
-      const arcData = res.data.filter((call) => {
-        call.is_archived
+    axios
+      .get(url)
+      .then((res) => {
+        const arcData = res.data.filter((call) => {
+          call.is_archived;
+        });
+        setArchivedCalls(arcData);
+      })
+      .catch((e) => {
+        console.log("error, ", e);
       });
-      console.log(arcData, "archivedCallData");
-      setArchivedCalls(arcData)
-    }).catch((e) => {
-      console.log("error, ", e)
-    })
   }
 
-
   useEffect(() => {
-    allCallData(),
-    archivedCallData()
+    allCallData(), archivedCallData();
   }, []);
 
   return (
     <div className="container">
       <Header />
       <div className="container-view">
-        Some activities should be here
-        <ActivityFeed calls={allCalls}/>
+        {state === "CURRENT" && <h1> Call List</h1> && (
+          <ActivityFeed
+            allCalls={allCalls}
+            setAllCalls={setAllCalls}
+            archivedCalls={archivedCalls}
+            setArchivedCalls={setArchivedCalls}
+            state={state}
+            setState={setState}
+          />
+        )}
+        {state === "ARCHIVE" &&  ( 
+          <ActivityFeed
+            archivedCalls={archivedCalls}
+            setArchivedCalls={setArchivedCalls}
+            state={state}
+            setState={setState}
+          />
+        )}
       </div>
-      <Footer />
+      <div className="footer">
+      <Footer state={state} setState={setState} />
+      </div>
     </div>
   );
 };
