@@ -1,3 +1,9 @@
-.call-feed {
+.call-list {
   border: 5px;;
+  border-color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+.call-list-items {
 }

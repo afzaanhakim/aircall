@@ -1,0 +1,25 @@
+.activity-feed-items{
+  display:flex;
+  border-color: rgb(0, 0, 0);
+  background: linear-gradient(90deg, rgba(151,83,193,1) 9%, rgba(128,22,115,0.8267682072829132) 50%, rgba(96,69,252,1) 100%);
+  margin-bottom: 1em;;
+  justify-content: space-between;
+  align-items:center;
+  padding-right:5px;;
+  padding-left:5px;;
+  border-radius: 1em;;
+  color: white
+}
+
+.call-info{
+  display:column;
+}
+
+.icons {
+  margin-right: 5px;
+}
+
+.icons-callerInfo{
+  display:flex;
+  border-color: rgb(0, 0, 0);
+}
