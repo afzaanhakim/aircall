@@ -2,31 +2,29 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-left:15px;
+  margin-left: 15px;
   margin-right: 15px;
-  margin-top:5px;
+  margin-top: 5px;
 }
 
 footer {
   display: block;
   justify-content: space-around;
-height:80px;
+  height: 80px;
   align-self: flex-end;
   width: 376px;
   position: static;
   background-color: #f245f029;
-  padding-top:5px;
+  padding-top: 5px;
 }
-
-
 
 .footer-call-list {
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  margin-bottom:10px;
-  width:50%
+  margin-bottom: 10px;
+  width: 50%;
 }
 
 .footer-call-list:hover {
@@ -34,7 +32,6 @@ height:80px;
   flex-direction: column;
   align-items: center;
   background-color: rgb(237, 238, 237);
-
 }
 
 .footer-keypad {
@@ -42,8 +39,8 @@ height:80px;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  margin-bottom:10px;
-  width:50%
+  margin-bottom: 10px;
+  width: 50%;
 }
 
 .footer-keypad:hover {
@@ -58,8 +55,8 @@ height:80px;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  margin-bottom:10px;
-  width:55%
+  margin-bottom: 10px;
+  width: 55%;
 }
 
 .footer-archived-list:hover {

@@ -19,8 +19,8 @@ const App = () => {
       .catch((e) => {
         console.log("error,", e);
       });
-      console.log(allCalls)
-  }
+    console.log(allCalls);
+  };
 
   const archivedCallData = () => {
     axios
@@ -34,7 +34,7 @@ const App = () => {
       .catch((e) => {
         console.log("error, ", e);
       });
-  }
+  };
 
   useEffect(() => {
     allCallData(), archivedCallData();

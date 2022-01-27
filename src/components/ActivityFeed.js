@@ -12,11 +12,19 @@ const ActivityFeed = (props) => {
     setState,
   } = props;
 
-
   return (
     <div className="call-list">
-      {state === "CURRENT" &&<strong> <h1>Call Log</h1></strong>}
-      {state === "ARCHIVE" && <strong><h1>Archived Calls</h1></strong>}
+      {state === "CURRENT" && (
+        <strong>
+          {" "}
+          <h1>Call Log</h1>
+        </strong>
+      )}
+      {state === "ARCHIVE" && (
+        <strong>
+          <h1>Archived Calls</h1>
+        </strong>
+      )}
       <div className="call-list-items">
         {state === "CURRENT" &&
           allCalls.map((call) => {
@@ -33,7 +41,7 @@ const ActivityFeed = (props) => {
               />
             );
           })}
-          {state === "ARCHIVE" &&
+        {state === "ARCHIVE" &&
           archivedCalls.map((call) => {
             return (
               <ActivityFeedItems
