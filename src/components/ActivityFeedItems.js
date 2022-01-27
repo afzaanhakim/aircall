@@ -19,6 +19,7 @@ const ActivityFeedItems = (props) => {
     archivedCalls,
     setArchivedCalls,
     state,
+    setState,
   } = props;
 
   const handleArchive = () => {
@@ -27,8 +28,13 @@ const ActivityFeedItems = (props) => {
         is_archived: !call.is_archived,
       })
       .then((res) => {
-        setAllCalls([...allCalls.filter((c) => c.id !== res.data.id)]);
+        if(allCalls){
+        setAllCalls(allCalls.filter((c) => c.id !== res.data.id));
         setArchivedCalls([...archivedCalls, call]);
+      }
+      else {
+        setAllCalls([])
+      }
       })
       .catch((e) => {
         console.log("Error", e);
@@ -36,19 +42,18 @@ const ActivityFeedItems = (props) => {
   };
 
   const handleUnarchiveCall = () => {
-    console.log(archivedCalls, "in handle unarchive call")
     axios
       .post(`https://aircall-job.herokuapp.com/activities/${call.id}`, {
         is_archived: call.is_archived,
       })
       .then((res) => {
-        console.log(archivedCalls, "is archivedCalls")
-        setArchivedCalls([
-          ...archivedCalls.filter((c) => 
-            c.id !== res.data.id
-          ),
-        ]);
+        if (archivedCalls) {
+          setArchivedCalls(archivedCalls.filter((c) => c.id !== res.data.id));
+        } else {
+          setArchivedCalls([]);
+        }
         setAllCalls([...allCalls, call]);
+        setState("ARCHIVE");
       })
       .catch((e) => console.log(e, "is the error l55"));
   };
@@ -67,7 +72,9 @@ const ActivityFeedItems = (props) => {
           </div>
           <div className="call-info">
             <p>
-              <strong>{call.from} <i> ({call.call_type})</i></strong>
+              <strong>
+                {call.from} <i> ({call.call_type})</i>
+              </strong>
             </p>
             <p>
               tried to call on <strong>{call.via}</strong>
@@ -83,7 +90,12 @@ const ActivityFeedItems = (props) => {
             <RiArchiveDrawerLine size={30} onClick={() => handleArchive()} />
           )}
           {state === "ARCHIVE" && (
-            <RiArchiveDrawerLine size={30} onClick={handleUnarchiveCall} />
+            <RiArchiveDrawerLine
+              size={30}
+              onClick={() => {
+                handleUnarchiveCall();
+              }}
+            />
           )}
         </div>{" "}
       </div>

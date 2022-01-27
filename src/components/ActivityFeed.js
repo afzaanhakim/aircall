@@ -3,7 +3,6 @@ import ActivityFeedItems from "./ActivityFeedItems";
 import "../css/ActivityFeed.css";
 
 const ActivityFeed = (props) => {
-  const [showCallDetail, setShowCallDetail] = useState(false);
   const {
     allCalls,
     setAllCalls,
@@ -15,8 +14,8 @@ const ActivityFeed = (props) => {
 
   return (
     <div className="call-list">
-      {state === "CURRENT" && <h2>All Calls</h2>}
-      {state === "ARCHIVE" && <h2>Archived Calls</h2>}
+      {state === "CURRENT" &&<strong> <h2>All Calls</h2></strong>}
+      {state === "ARCHIVE" && <strong><h2>Archived Calls</h2></strong>}
       <div className="call-list-items">
         {state === "CURRENT" &&
           allCalls.map((call) => {

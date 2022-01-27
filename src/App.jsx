@@ -10,11 +10,10 @@ const App = () => {
   const [state, setState] = useState("CURRENT");
   const url = "https://aircall-job.herokuapp.com/activities";
 
-  function allCallData() {
+  const allCallData = () => {
     axios
       .get(url)
       .then((res) => {
-        console.log(res.data);
         setAllCalls(res.data);
       })
       .catch((e) => {
@@ -22,7 +21,7 @@ const App = () => {
       });
   }
 
-  function archivedCallData() {
+  const archivedCallData = () => {
     axios
       .get(url)
       .then((res) => {
@@ -54,8 +53,10 @@ const App = () => {
             setState={setState}
           />
         )}
-        {state === "ARCHIVE" &&  ( 
+        {state === "ARCHIVE" && (
           <ActivityFeed
+            allCalls={allCalls}
+            setAllCalls={setAllCalls}
             archivedCalls={archivedCalls}
             setArchivedCalls={setArchivedCalls}
             state={state}
@@ -63,9 +64,8 @@ const App = () => {
           />
         )}
       </div>
-      <div className="footer">
+
       <Footer state={state} setState={setState} />
-      </div>
     </div>
   );
 };
