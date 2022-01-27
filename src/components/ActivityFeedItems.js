@@ -1,17 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import "../css/ActivityFeedItems.css";
-import {
-  FiPhoneIncoming,
-  FiPhoneOutgoing,
-  FiPlus,
-  FiMinus,
-} from "react-icons/fi";
+import { FiPhoneIncoming, FiPhoneOutgoing } from "react-icons/fi";
 import ReactTimeago from "react-timeago";
 import axios from "axios";
 import { RiArchiveDrawerLine } from "react-icons/ri";
+import { MdOutlineUnarchive, MdVoicemail } from "react-icons/md";
 
 const ActivityFeedItems = (props) => {
-  // const [showFull, setShowFull] = useState(false);
   const {
     allCalls,
     call,
@@ -28,13 +23,12 @@ const ActivityFeedItems = (props) => {
         is_archived: !call.is_archived,
       })
       .then((res) => {
-        if(allCalls){
-        setAllCalls(allCalls.filter((c) => c.id !== res.data.id));
-        setArchivedCalls([...archivedCalls, call]);
-      }
-      else {
-        setAllCalls([])
-      }
+        if (allCalls) {
+          setAllCalls(allCalls.filter((c) => c.id !== res.data.id));
+          setArchivedCalls([...archivedCalls, call]);
+        } else {
+          setAllCalls([]);
+        }
       })
       .catch((e) => {
         console.log("Error", e);
@@ -44,7 +38,7 @@ const ActivityFeedItems = (props) => {
   const handleUnarchiveCall = () => {
     axios
       .post(`https://aircall-job.herokuapp.com/activities/${call.id}`, {
-        is_archived: call.is_archived,
+        is_archived: call.is_archived ? !call.is_archived : call.is_archived,
       })
       .then((res) => {
         if (archivedCalls) {
@@ -64,20 +58,29 @@ const ActivityFeedItems = (props) => {
         <div className="icons-callerInfo">
           <div className="icons">
             <p>
-              {call.direction === "inbound" && <FiPhoneIncoming size={20} />}
+              {call.direction === "inbound" &&
+                call.call_type === "answered" && (
+                  <FiPhoneIncoming size={20} color={"green"} />
+                )}
             </p>
             <p>
-              {call.direction === "outbound" && <FiPhoneOutgoing size={20} />}
+              {call.direction === "outbound" && call.call_type === "missed" && (
+                <FiPhoneOutgoing size={20} color={"red"} />
+              )}
+            </p>
+            <p>
+              {call.direction === "inbound" &&
+                call.call_type === "voicemail" && (
+                  <MdVoicemail size={20} color={"black"} />
+                )}
             </p>
           </div>
           <div className="call-info">
             <p>
-              <strong>
-                {call.from} <i> ({call.call_type})</i>
-              </strong>
+              <strong>{call.from}</strong> <i> ({call.call_type})</i>
             </p>
             <p>
-              tried to call on <strong>{call.via}</strong>
+              <em>via</em> <strong>{call.via}</strong>
             </p>
           </div>{" "}
         </div>
@@ -87,11 +90,16 @@ const ActivityFeedItems = (props) => {
             <ReactTimeago date={call.created_at} />{" "}
           </p>
           {state === "CURRENT" && (
-            <RiArchiveDrawerLine size={30} onClick={() => handleArchive()} />
-          )}
-          {state === "ARCHIVE" && (
             <RiArchiveDrawerLine
               size={30}
+              onClick={() => handleArchive()}
+              color={"red"}
+            />
+          )}
+          {state === "ARCHIVE" && (
+            <MdOutlineUnarchive
+              size={30}
+              color={"green"}
               onClick={() => {
                 handleUnarchiveCall();
               }}

@@ -19,6 +19,7 @@ const App = () => {
       .catch((e) => {
         console.log("error,", e);
       });
+      console.log(allCalls)
   }
 
   const archivedCallData = () => {
@@ -43,7 +44,7 @@ const App = () => {
     <div className="container">
       <Header />
       <div className="container-view">
-        {state === "CURRENT" && <h1> Call List</h1> && (
+        {state === "CURRENT" && (
           <ActivityFeed
             allCalls={allCalls}
             setAllCalls={setAllCalls}

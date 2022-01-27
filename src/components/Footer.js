@@ -12,7 +12,7 @@ const Footer = (props) => {
           {" "}
           <GiHamburgerMenu size={30} /> <p>Call List </p>{" "}
         </div>
-        <div className="footer-call-list" >
+        <div className="footer-keypad" >
           {" "}
           <IoMdKeypad size={30} /> <p>Keypad</p>{" "}
         </div>
