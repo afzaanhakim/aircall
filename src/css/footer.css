@@ -5,12 +5,12 @@
 }
 
 footer {
-  position: relative;
-  border-top:lawngreen;
-  border-style: solid 1px;
-  padding-top:2px;
-  bottom: 5px;
-  width: 375px;
+  display: block;
+  justify-content: space-around;
+height:80px;
+  align-self: flex-end;
+  width: 376px;
+  position: static
 }
 
 
@@ -21,16 +21,18 @@ footer {
   align-items: center;
   cursor: pointer;
   margin-bottom:10px;
+  margin-right: 10px;
+  width:50%
 }
 
 .footer-call-list:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(200, 207, 200);
-  border-radius: 25%;
+  background-color: rgb(237, 238, 237);
   padding-left:3px;
   padding-right:3px;
+  margin-right: 10px;
 }
 
 .footer-archived-list {
@@ -39,15 +41,15 @@ footer {
   align-items: center;
   cursor: pointer;
   margin-bottom:10px;
-  
-
+  margin-left: 10px;
+  width:50%
 }
 
 .footer-archived-list:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(200, 207, 200);
-  border-radius: 25%;
+  background-color: rgb(237, 238, 237);
+  margin-left: 10px;
   
 }
